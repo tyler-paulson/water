@@ -2,11 +2,18 @@
 
 <head>
 
-	<title>Redirect</title>
+	<title>Fitbit Water Bttn | Redirect</title>
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
 </head>
 
 <body>
+
+<?php include('includes/nav.php'); ?>
+
+<div class="container">
 
 <?php
 
@@ -40,21 +47,26 @@ $fitbitid = $obj->user_id;
 $connection = mysqli_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB);
 
 if (mysqli_connect_errno()) {
-	echo '<p>Database connection error.</p>';
+	echo '<div class="alert alert-danger" role="alert">Database connection error.</div>';
 	exit();
 }
 
 $query = 'INSERT INTO users VALUES (\''.$fitbitid.'\',\''.$usertoken.'\')';
 
 if(mysqli_query($connection, $query)) {
-	echo '<p>Success.</p>';
+	echo '<div class="alert alert-success" role="alert">Success.</div>';
 } else {
-	echo '<p>Query fail.</p>';
+	echo '<div class="alert alert-danger" role="alert">Query fail.</div>';
 }
 
 mysqli_close($connection);
 
 ?>
+
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 
