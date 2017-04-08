@@ -4,7 +4,9 @@ header("Content-Type: text/plain");
 
 require_once('config.php');
 
-$id = '32C7FN';
+// Get the FitBit ID from the request
+
+$id = $_REQUEST['id'];
 
 // We'll use this in both API requests
 
