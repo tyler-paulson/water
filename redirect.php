@@ -56,6 +56,7 @@ $query = 'INSERT INTO users VALUES (\''.$fitbitid.'\',\''.$usertoken.'\',\''.$re
 
 if(mysqli_query($connection, $query)) {
 	echo '<div class="alert alert-success" role="alert">Success.</div>';
+	echo '<p>Send a GET or POST request to this URL to log a glass of water: <strong>'.POST_URI.'?id='.$fitbitid.'</strong></p>';
 } else {
 	echo '<div class="alert alert-danger" role="alert">Query fail.</div>';
 }
