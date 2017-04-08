@@ -34,7 +34,7 @@ $opts = array(
 $context = stream_context_create($opts);
 
 $uri = file_get_contents(
-  'https://api.fitbit.com/oauth2/token?client_id='.CLIENT_ID.'&grant_type=authorization_code&redirect_uri='.REDIRECT_URI.'&code='.$key,
+  'https://api.fitbit.com/oauth2/token?client_id='.CLIENT_ID.'&grant_type=authorization_code&redirect_uri='.REDIRECT_URI.'&code='.$key.'&expires_in=3600',
   false,
   $context
 );
@@ -42,6 +42,7 @@ $uri = file_get_contents(
 $obj = json_decode($uri);
 
 $usertoken = $obj->access_token;
+$refreshtoken = $obj->refresh_token;
 $fitbitid = $obj->user_id;
 
 $connection = mysqli_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB);
@@ -51,7 +52,7 @@ if (mysqli_connect_errno()) {
 	exit();
 }
 
-$query = 'INSERT INTO users VALUES (\''.$fitbitid.'\',\''.$usertoken.'\')';
+$query = 'INSERT INTO users VALUES (\''.$fitbitid.'\',\''.$usertoken.'\',\''.$refreshtoken.'\')';
 
 if(mysqli_query($connection, $query)) {
 	echo '<div class="alert alert-success" role="alert">Success.</div>';
